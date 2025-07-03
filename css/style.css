@@ -17,7 +17,7 @@
 	--color-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
 }
 
-/* body.dark {
+body.dark {
 	--color-bg: #222331;
 	--color-bg-gradient: linear-gradient(135deg, #232526 0%, #414345 100%);
 	--color-player-bg: rgba(34, 34, 34, 0.75);
@@ -28,7 +28,7 @@
 	--color-text-secondary: #bdbdbd;
 	--color-border: #333647;
 	--color-shadow: 0 4px 24px rgba(0, 195, 255, 0.09);
-} */
+}
 
 * {
 	margin: 0;
@@ -42,6 +42,19 @@ body {
 	font-family: var(--font-main);
 	background: var(--color-bg-gradient);
 	color: var(--color-text);
+}
+
+body {
+	transition: background 0.5s, color 0.5s, filter 0.5s;
+}
+
+.player,
+.nav__menu,
+.player__track-title,
+header,
+main {
+	transition: background 0.5s, color 0.5s, box-shadow 0.5s,
+		backdrop-filter 0.5s;
 }
 
 /* ! options */
