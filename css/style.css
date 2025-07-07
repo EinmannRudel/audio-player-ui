@@ -1,10 +1,12 @@
+/**         FONTS & COLORS        */
+
+/** Google Fonts: Montserrat */
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900');
 
+/** Main color palette & variables for theme switching */
 :root {
-	/* Шрифти */
 	--font-main: 'Montserrat', Arial, sans-serif;
 
-	/* Кольори для світлої теми */
 	--color-bg: #f5f6fa;
 	--color-bg-gradient: linear-gradient(135deg, #e0c3fc 0%, #8ec5fc 100%);
 	--color-player-bg: rgba(255, 255, 255, 0.7);
@@ -17,6 +19,7 @@
 	--color-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
 }
 
+/** Dark theme overrides (applied by .dark on <body>) */
 body.dark {
 	--color-bg: #222331;
 	--color-bg-gradient: linear-gradient(135deg, #232526 0%, #414345 100%);
@@ -30,24 +33,34 @@ body.dark {
 	--color-shadow: 0 4px 24px rgba(0, 195, 255, 0.09);
 }
 
+/**         BASIC RESETS          */
+
+/** Remove default browser margin & padding, enable border-box model */
 * {
 	margin: 0;
 	padding: 0;
 	box-sizing: border-box;
 }
 
+/**         GLOBAL STYLES         */
+
+/** Body background, color, font and smooth transitions for theme switching */
 body {
 	width: 100%;
 	height: 100vh;
 	font-family: var(--font-main);
 	background: var(--color-bg-gradient);
 	color: var(--color-text);
+	overflow: hidden;
 }
 
 body {
 	transition: background 0.5s, color 0.5s, filter 0.5s;
 }
 
+/**         TRANSITIONS           */
+
+/** Smooth color/background/shadow transitions for main components */
 .player,
 .nav__menu,
 .player__track-title,
@@ -57,18 +70,21 @@ main {
 		backdrop-filter 0.5s;
 }
 
-/* ! options */
+/**        UTILITY CLASSES        */
 
+/** Hide block (used for  menus) */
 .hidden {
 	display: none;
 }
 
+/** Display as flex (used to activate menus) */
 .active {
 	display: flex;
 }
 
-/** NavBar mobile*/
+/**     HEADER & NAV MOBILE       */
 
+/** --- Header container and logo --- */
 header {
 	width: 100%;
 	max-width: 80%;
@@ -89,29 +105,7 @@ header {
 	color: var(--color-text);
 }
 
-/* nav {
-	width: 100%;
-	height: 300px;
-
-	 display: flex; 
-	 display: none; 
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
-	gap: 40px;
-
-	position: absolute;
-	top: 50px;
-
-	background: var(--color-player-bg);
-	box-shadow: var(--color-shadow);
-
-	transform: translateY(-100%);
-	opacity: 0;
-	transition: transform 0.4s, opacity 0.3s;
-	pointer-events: none;
-} */
-
+/** --- Mobile navigation menu (burger) --- */
 .nav__menu {
 	width: 100vw;
 	height: 300px;
@@ -199,8 +193,9 @@ svg {
 	cursor: pointer;
 }
 
-/** main player */
+/**           MAIN PLAYER         */
 
+/** Hide <audio> element visually, keep for logic */
 .player__audio {
 	display: none;
 }
@@ -212,10 +207,41 @@ main {
 
 	display: flex;
 	justify-content: center;
+	flex-direction: column;
 
 	margin: 70px auto 0 auto;
 	padding-bottom: 30px;
 }
+
+/** --- Playlist search bar --- */
+
+.playlist__search-global {
+	display: flex;
+	justify-content: center;
+	margin-top: 100px;
+	margin-bottom: 40px;
+}
+#playlist-search {
+	width: 360px;
+	max-width: 95vw;
+	padding: 10px 16px;
+	border: 1px solid var(--color-border);
+	border-radius: 14px;
+	font-size: 1.13em;
+	font-family: var(--font-main);
+	background: var(--color-bg);
+	color: var(--color-text);
+	box-shadow: 0 4px 24px rgba(127, 83, 172, 0.07);
+	transition: border 0.2s, box-shadow 0.2s;
+	outline: none;
+}
+#playlist-search:focus {
+	border: 1.5px solid var(--color-primary);
+	box-shadow: 0 0 8px var(--color-primary);
+}
+
+/** --- Player container (background, roundness, shadow) --- */
+
 .player {
 	max-width: 540px;
 	padding: 40px;
@@ -224,6 +250,8 @@ main {
 	background: rgba(255, 255, 255, 0.18);
 	backdrop-filter: blur(14px);
 }
+
+/** --- Track info (title and artist) --- */
 
 .player__track-info {
 	margin: 50px auto;
@@ -247,6 +275,8 @@ main {
 	color: var(--color-text-secondary);
 }
 
+/** --- Progress bar and time display --- */
+
 .player__progress-bar {
 	margin-bottom: 50px;
 	margin-inline: auto;
@@ -257,7 +287,7 @@ main {
 }
 
 .player__current-time,
-.player__duration {
+.player__duration-time {
 	font-size: 1.1em;
 	letter-spacing: 1px;
 	font-weight: 500;
@@ -273,7 +303,7 @@ main {
 
 .player__range::-webkit-slider-runnable-track {
 	height: 6px;
-	background: #222; /* або var(--color-bg) для темної теми */
+	background: #222;
 	border-radius: 3px;
 	box-shadow: 0 2px 8px 0 rgba(127, 83, 172, 0.13);
 }
@@ -288,6 +318,8 @@ main {
 	margin-top: -5px;
 	cursor: pointer;
 }
+
+/** --- Controls (Play, Prev, Next) --- */
 
 .player__controls {
 	text-align: center;
@@ -318,6 +350,10 @@ main {
 	fill: var(--color-primary);
 }
 
+/** --- Volume controls --- */
+
+/** volume button  */
+
 .player__volume {
 	display: flex;
 	align-items: center;
@@ -347,6 +383,9 @@ main {
 #player__volume-button:hover {
 	fill: var(--color-primary);
 }
+
+/** volume range  */
+
 .player__volume-range {
 	width: 80px;
 	height: 4px;
@@ -372,7 +411,6 @@ main {
 	pointer-events: auto;
 }
 
-/* Track */
 .player__volume-range::-webkit-slider-runnable-track {
 	height: 4px;
 	background: #222;
@@ -385,7 +423,6 @@ main {
 	box-shadow: 0 1px 8px var(--color-primary);
 }
 
-/* Thumb */
 .player__volume-range::-webkit-slider-thumb {
 	appearance: none;
 	width: 12px;
@@ -404,6 +441,69 @@ main {
 	box-shadow: 0 0 6px var(--color-primary);
 }
 
+/**         PLAYLIST CONTAINER    */
+
+/** Positioning and animation for playlist popup */
+
+#playlist-container {
+	position: absolute;
+	right: -36px;
+
+	top: 505px;
+
+	background: var(--color-player-bg);
+	border: 1px solid var(--color-border);
+	box-shadow: var(--color-shadow);
+	max-height: 320px;
+	width: 340px;
+	z-index: 300;
+	overflow-y: auto;
+	border-radius: 18px;
+	padding: 8px 0;
+	transition: opacity 0.8s, transform 0.8s;
+	font-family: var(--font-main);
+}
+
+#playlist-container.hide {
+	opacity: 0;
+	pointer-events: none;
+
+	transform: translateX(120%) scale(0.98);
+}
+#playlist-container:not(.hide) {
+	opacity: 1;
+	pointer-events: auto;
+	transform: translateY(250px) translateX(0) scale(1);
+}
+
+#playlist {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+#playlist li {
+	padding: 12px 18px;
+	color: var(--color-text);
+	font-size: 1.08em;
+	cursor: pointer;
+	border-bottom: 1px solid var(--color-border);
+	transition: background 0.18s, color 0.18s;
+	font-family: var(--font-main);
+	font-size: 1.4em;
+}
+#playlist li:last-child {
+	border-bottom: none;
+}
+#playlist li:hover,
+#playlist li.active {
+	background: var(--color-secondary);
+	color: #fff;
+}
+
+/**          MEDIA QUERIES        */
+
+/** --- Extra small screens  --- */
+
 @media (max-width: 350px) {
 	.player__track-title {
 		font-size: 1.2em;
@@ -413,9 +513,27 @@ main {
 	}
 }
 
+/** --- Tablets and above --- */
+
 @media (min-width: 768px) {
 	hr {
 		display: none;
+	}
+
+	#playlist-container {
+		position: absolute;
+		right: -78px;
+		top: -196px;
+		/* bottom: -476px; */
+
+		max-height: 320px;
+		width: 340px;
+		z-index: 300;
+		overflow-y: auto;
+		border-radius: 18px;
+		padding: 8px 0;
+		transition: opacity 0.8s, transform 0.8s;
+		font-family: var(--font-main);
 	}
 	main {
 		display: flex;
@@ -448,7 +566,7 @@ main {
 		font-size: 1.6em;
 	}
 	.player__current-time,
-	.player__duration {
+	.player__duration-time {
 		font-size: 1.3em;
 	}
 	.player__range {
@@ -475,6 +593,8 @@ main {
 	}
 }
 
+/** --- Desktop (1200px+) --- */
+
 @media (min-width: 1200px) {
 	body {
 		overflow: hidden;
@@ -482,6 +602,7 @@ main {
 	header {
 		margin: 20px auto;
 	}
+
 	.burger__menu {
 		display: none;
 	}
@@ -514,7 +635,7 @@ main {
 
 	hr {
 		display: block;
-		width: 40px; /* буде "висота" */
+		width: 40px;
 		height: 1px;
 		background: var(--color-text-secondary);
 
@@ -528,11 +649,37 @@ main {
 		font-size: 1.5em;
 	}
 
+	#playlist-container {
+		position: absolute;
+		right: -234px;
+		top: 426px;
+
+		max-height: 320px;
+		width: 400px;
+
+		transition: opacity 0.3s, transform 0.3s;
+	}
+	#playlist-container.hide {
+		opacity: 0;
+		pointer-events: none;
+		transform: translateX(0px) scale(0.98);
+	}
+	#playlist-container:not(.hide) {
+		opacity: 1;
+		pointer-events: auto;
+		transform: translateX(-100px) scale(1);
+	}
+
 	main {
 		display: flex;
-		/* justify-content: center; */
+
 		align-items: center;
 		margin-top: 240px;
+	}
+
+	.playlist__search-global {
+		margin-top: -100px;
+		margin-bottom: 60px;
 	}
 
 	.player {
@@ -555,7 +702,7 @@ main {
 		font-size: 2em;
 	}
 	.player__current-time,
-	.player__duration {
+	.player__duration-time {
 		font-size: 1.7em;
 	}
 	.player__range {
@@ -586,11 +733,40 @@ main {
 
 	.player__volume-range::-webkit-slider-runnable-track {
 		height: 10px;
-		/* width не треба */
 	}
 
 	.player__volume-range::-webkit-slider-thumb {
 		width: 14px;
 		height: 14px;
+	}
+}
+
+/** --- FullHD screens (1920px+) --- */
+
+@media (min-width: 1920px) {
+	#playlist-container {
+		position: absolute;
+		right: -290px;
+		top: 426px;
+
+		max-height: 400px;
+		width: 400px;
+
+		transition: opacity 0.3s, transform 0.3s;
+	}
+}
+
+/** --- 2K/UltraHD screens (2560px+) --- */
+
+@media (min-width: 2560px) {
+	#playlist-container {
+		position: absolute;
+		right: -356px;
+		top: 426px;
+
+		max-height: 450px;
+		width: 400px;
+
+		transition: opacity 0.3s, transform 0.3s;
 	}
 }

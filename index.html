@@ -3,26 +3,43 @@
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link href="./icon/favicon-music.png" rel="icon" type="image/x-icon" />
 		<title>Audio Player</title>
 
+		<!-- Main styles -->
 		<link rel="stylesheet" href="./css/style.css" />
 	</head>
 	<body>
+		<!-- ================= HEADER ================ -->
 		<header>
+			<!-- Project logo/title -->
 			<h1 class="logo">EinMannRudel</h1>
 
+			<!-- Navigation menu (hidden on mobile, visible as burger menu) -->
 			<nav class="nav__menu">
-				<a href="" class="nav__links">Animation?</a>
+				<a href="" class="nav__links">Home</a>
 
 				<hr />
 
-				<a href="" class="nav__links">Playlist</a>
+				<!-- Playlist toggle (shows playlist on click) -->
+				<a href="" class="nav__links" id="playlist-toggle">Playlist</a>
+
+				<!-- Theme switcher -->
 				<div class="nav__theme">
 					<button id="theme__button">Change Theme</button>
 				</div>
 			</nav>
 
+			<!-- Playlist dropdown (appears over main UI) -->
+			<div id="playlist-container" class="">
+				<ul id="playlist">
+					<li>hello</li>
+				</ul>
+			</div>
+
+			<!-- Burger menu for mobile navigation -->
 			<div class="burger__menu">
+				<!-- Open menu button (burger icon) -->
 				<button class="burger__open">
 					<svg
 						xmlns="http://www.w3.org/2000/svg"
@@ -40,6 +57,7 @@
 					</svg>
 				</button>
 
+				<!-- Close menu button (cross icon, hidden by default) -->
 				<button class="burger__close hidden">
 					<svg
 						xmlns="http://www.w3.org/2000/svg"
@@ -59,19 +77,42 @@
 			</div>
 		</header>
 
+		<!-- ================= MAIN PLAYER AREA ================ -->
 		<main>
+			<!-- Playlist search input -->
+			<div class="playlist__search-global">
+				<input
+					type="text"
+					id="playlist-search"
+					placeholder="Знайти трек або артиста…"
+					autocomplete="off"
+				/>
+			</div>
+
+			<!-- Audio player UI -->
 			<div class="player">
+				<!-- Track info (title and artist) -->
 				<div class="player__track-info">
-					<span class="player__track-title">Dont Speak</span>
-					<span class="player__track-artist">No Dount</span>
+					<span id="track-title" class="player__track-title"
+						>Test Title</span
+					>
+					<span id="track-artist" class="player__track-artist"
+						>Test Artist</span
+					>
 				</div>
 
+				<!-- Progress bar and time -->
 				<div class="player__progress-bar">
-					<span class="player__current-time">03:00</span>
-					<input type="range" class="player__range" />
-					<span class="player__duration">02:10</span>
+					<span class="player__current-time"></span>
+					<input
+						type="range"
+						class="player__range"
+						id="progress-bar"
+					/>
+					<span class="player__duration-time"></span>
 				</div>
 
+				<!-- Player controls (prev, play/pause, next) -->
 				<div class="player__controls">
 					<button class="player__button player__button--prev">
 						<svg
@@ -123,6 +164,7 @@
 					</button>
 				</div>
 
+				<!-- Volume control -->
 				<div class="player__volume">
 					<svg
 						id="player__volume-button"
@@ -140,14 +182,22 @@
 						/>
 					</svg>
 
-					<input type="range" class="player__volume-range" />
+					<input
+						type="range"
+						class="player__volume-range"
+						min="0"
+						max="100"
+						value="70"
+					/>
 				</div>
 
-				<audio class="player__audio"></audio>
+				<!-- Hidden audio element for playback logic -->
+				<audio class="player__audio" id="player__audio"></audio>
 			</div>
 		</main>
 
+		<!-- ========== JAVASCRIPT (logic, interactivity) ========== -->
 		<script type="module" src="./js/main.js"></script>
-		<script type="module" src="./js/player.js"></script>
+		<!-- <script type="module" src="./js/player.js"></script> -->
 	</body>
 </html>
